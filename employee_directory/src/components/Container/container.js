@@ -1,10 +1,10 @@
 import API from "../../utils/employeeApi";
 import React, { Component } from "react";
 // Search component containes the search input box for the user to type in
-import Search from "../Search";
+import Search from "../Search/index";
 // Card component will contain the employee data rendered
 // nicely in a card element
-import Card from "../Card";
+import Card from "../Card/employee";
 
 //use class if we're gonna use user interaction a.k.a state (setState).
 class Container extends Component {
@@ -28,11 +28,39 @@ class Container extends Component {
       .then((res) =>
         this.setState({
           employees: res.data.results,
-          employeeData: res.data.results,
+
+          employeesData: res.data.results,
         })
       )
+
       .catch((err) => console.log(err));
   }
+
+  // sort results by name
+  sortByName = () => {
+    const filteredRes = this.state.employeesData;
+    if (this.state.ascending === "asc") {
+      const sorted = filteredRes.sort((a, b) =>
+        a.name.first > b.name.first ? 1 : -1
+      );
+      console.log(sorted);
+
+      this.setState({
+        employeesData: sorted,
+        ascending: "desc",
+      });
+    } else {
+      const sorted = filteredRes.sort((a, b) =>
+        a.name.first > b.name.first ? -1 : 1
+      );
+      console.log(sorted);
+
+      this.setState({
+        employeesData: sorted,
+        ascending: "asc",
+      });
+    }
+  };
 
   // As the user types a name, the names matching the user input will be
   // displayed on the screen.
@@ -50,48 +78,51 @@ class Container extends Component {
     });
   };
 
-  // Api call should render random employee results when the 
+  // Api call should render random employee results when the
   // page is first loaded or refreshed
   searchEmployee = () => {
     API.getEmployees()
-    .then(res => this.setState({
-        employees: res.data.results,
-        employeesData: res.data.results
-        
-    }))
-    .catch(err => console.log(err))
+      .then((res) =>
+        this.setState({
+          employees: res.data.results,
+          employeesData: res.data.results,
+        })
+      )
+      .catch((err) => console.log(err));
   };
 
   // tracks when the search button is clicked on
   // or the user presses enter.
-  handleSubmit = (event) => {
+  handleSearch = (event) => {
     event.preventDefault();
-    if(!this.state.search){
-        alert("Enter an employee name, please.")
+    if (!this.state.search) {
+      alert("Enter an employee name, please.");
     }
     const { employees, search } = this.state;
 
-    const employeesData = employees.filter( employee => employee.name.fist.toLowerCase().includes(search.toLowerCase()));
+    const employeesData = employees.filter((employee) =>
+      employee.name.first.toLowerCase().includes(search.toLowerCase())
+    );
 
     this.setState({
-        employeesData
-    })
-
- 
+      employeesData,
+    });
   };
 
   render() {
-      return(
-          <div>
-              <Search
-              employee={this.state.employees}
-              handleSubmit={this.handleSubmit}
-              handleChange={this.handleChange}
-              />
-              <Card
-              results={this.state.employeesData}
-              />
-              </div>
-      )
+    return (
+      <div>
+        <Search
+          employee={this.state.employees}
+          handleSearch={this.handleSearch}
+          handleChange={this.handleChange}
+        />
+        <Card results={this.state.employeesData}
+        sortByName={this.sortByName} 
+        />
+      </div>
+    );
   }
 }
+
+export default Container;

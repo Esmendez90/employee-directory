@@ -1,23 +1,42 @@
 import React from "react";
 
-function Card() {
-  let styles = {
-    div: {
-      width: "18rem",
-      margin: "10px auto",
-    },
-  };
+function Card(props) {
+  // let styles = {
+  //   div: {
+  //     width: "18rem",
+  //     margin: "10px auto",
+  //   },
+  // };
   return (
     <>
-      <div className="card" style={styles.div}>
-        {/* <img src="..." className="card-img-top" alt="..." /> */}
-        <div className="card-body">
-          <h5 className="card-title">Name</h5>
-          <p className="card-text">Some info.</p>
-          <p className="card-text">Some info.</p>
-          <p className="card-text">Some info.</p>
-        </div>
-      </div>
+     <table className="tableEmployee ">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th onClick={props.sortByName}>Name</th>
+                    <th>Phone</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+
+            <tbody className= "">
+                {props.results.map(result => (
+                    <tr className="table" key={result.login.uuid}>
+                     
+
+                        <td> <img className="
+                        "src={result.picture.medium} alt="" /></td>
+                        
+                        <td>{result.name.first + " " + result.name.last}  </td>
+
+                        <td>{result.cell}</td>
+                        <td className="email"><a href={result.email}>{result.email}</a></td>
+                        
+                    </tr>
+                ))}
+            </tbody>
+        </table >
+
     </>
   );
 }

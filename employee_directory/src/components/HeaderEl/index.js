@@ -1,7 +1,6 @@
 // I should create the header that will be
 // a constant element on my page
 import React from "react";
-// import { Link } from "react-router-dom";
 
 function HeaderEl() {
   let styles = {

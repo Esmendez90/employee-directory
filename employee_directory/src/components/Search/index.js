@@ -16,7 +16,7 @@ function Search(props) {
   return (
     <>
       <main>
-        <form id="searchForm" onSubmit={this.handleSubmit} style={styles.form}>
+        <form id="searchForm" onSubmit={props.handleSearch} style={styles.form}>
           <input
             type="text"
             className="form-control"
@@ -30,7 +30,7 @@ function Search(props) {
           />
           <button
             className="btn btn-outline-primary"
-            onSubmit={props.handleSubmit}
+            onClick={props.handleSearch}
             type="submit"
             id="search"
           >
