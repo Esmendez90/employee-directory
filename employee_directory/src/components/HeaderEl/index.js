@@ -5,7 +5,6 @@ import React from "react";
 function HeaderEl() {
   let styles = {
     header: {
-      maxWidth: "100%",
       margin: "0px auto 10px ",
       height: "200px",
       backgroundColor: "#FED766",

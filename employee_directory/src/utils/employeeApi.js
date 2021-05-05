@@ -12,7 +12,7 @@ const api = {
     // when you dont have the curly braces on an ES6 functions, it will return 
     // the right handside evalutation...since its only one line.
      getEmployees: () =>
-      axios.get("https://randomuser.me/api/?results=30&nat=us"),
+      axios.get("https://randomuser.me/api/?results=200&nat=us"),
 
 
 }

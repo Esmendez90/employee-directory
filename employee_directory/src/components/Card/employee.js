@@ -1,15 +1,14 @@
 import React from "react";
 
 function Card(props) {
-  // let styles = {
-  //   div: {
-  //     width: "18rem",
-  //     margin: "10px auto",
-  //   },
-  // };
+  let styles = {
+    table: {
+      margin: "30px auto"
+    },
+  };
   return (
     <>
-     <table className="tableEmployee ">
+     <table className="tableEmployee " style={styles.table}>
             <thead>
                 <tr>
                     <th></th>
